@@ -1,0 +1,21 @@
+{% if msg %}
+<script>
+    alert('{{msg}}')
+</script>
+{% endif %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Busqueda</title>
+
+</head>
+<body>
+<form action="/apiAnalisis/buscarCliente/" method="post">
+    {% csrf_token %}
+    <p>DNI:
+    <input type="number" name="Dni"></p>
+    <p><input type="submit" value="BUSCAR"></p>
+</form>
+</body>
+</html>

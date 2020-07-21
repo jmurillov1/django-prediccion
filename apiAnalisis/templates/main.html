@@ -1,0 +1,103 @@
+{% if msg %}
+<script>
+    alert('{{msg}}')
+</script>
+{% endif %}
+
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Inicio</title>
+</head>
+
+<body>
+
+<style>
+    .zoom_image {
+        display: block;
+        transition: transform .2s; /* Animation */
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .zoom_image:hover {
+
+        transform: scale(1.5);
+    }
+</style>
+
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Servicios</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="/apiAnalisis/">Inicio</a></li>
+            <li><a href="/apiAnalisis/mostrarInterfazBuscar/"> Buscar un Cliente</a></li>
+            <li><a href="/apiAnalisis/clientes/"> Mostrar Clientes</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container" style="
+        width: 70%;
+        float: none;
+        display: block;
+        margin-left: auto;
+        text-align: center;
+        margin-top: auto;
+        margin-bottom: 2%;
+        ">
+    <img style="width: 65vw; height: 15vw; margin-bottom: 5px"
+         src="https://docs.google.com/uc?export=download&id=1s-8J4HUt91yuWSvCJiqi2x0nwco2I10z"/>
+    
+</div>
+
+<div style="
+        width: 100%;
+        max-width: 1400px;
+        display: block;
+        position: relative;
+        margin-left: auto;
+        margin-right: auto;
+        ">
+    {% block content %}
+        <form action="/apiAnalisis/predecirTipoCliente/" method="post">
+			{% csrf_token %}
+			<p>DNI:
+			<input type="number" name="Dni"></p>
+			<p><input type="submit" value="PREDECIR"></p>
+		</form>
+
+    {% endblock %}
+</div>
+
+<footer style="background-color: black; color: black; height: auto; margin-top: 20px">
+    <div class="mt-5 pt-5 pb-5 footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5 col-xs-10 about-company">
+                    <h2 style="font-size: 2em">Enlaces Externos</h2>
+                    <p class="pr-5 text-white-50"><a href="https://github.com/Remigiohurtadoins/proyectoanalisisdatos"
+                                                     style="font-size: 1.5em">- Repositorio en github</a></p><br>
+                </div>
+
+                <div class="col-lg-4 col-xs-10 location">
+                    <h4 class="mt-lg-0 mt-sm-4" style="font-size: 2em; min-font-size: 25px">Desarrollador:</h4><br>
+                    <h4>Remigio Hurtado</h4><br>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+</body>
+
+</html>
