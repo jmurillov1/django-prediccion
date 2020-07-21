@@ -132,15 +132,16 @@ class Clasificacion():
     @csrf_exempt
     def guardar(request):
         try:
-            df = pd.read_csv('/home/gatitojm_17/django/django-services/apiAnalisis/Datasets/DatasetBanco/3.DatasetBanco.csv')
+            df = pd.read_csv('apiAnalisis/Datasets/DatasetBanco/3.DatasetBanco.csv')
             solis = [list(row) for row in df.values]
             body = json.loads(request.body.decode('utf-8'))
             foo = body.get("credito")
             li = foo.split(";")
+            print(li)
             if li in solis:
                 print("Valor Repetido")
             else:
-                with open('/home/gatitojm_17/django/django-services/apiAnalisis/Datasets/DatasetBanco/3.DatasetBanco.csv','a') as f:
+                with open('apiAnalisis/Datasets/DatasetBanco/3.DatasetBanco.csv','a') as f:
                     writer = csv.writer(f,delimiter =";",quoting=csv.QUOTE_NONE)
                     writer.writerow(li)
         except:
