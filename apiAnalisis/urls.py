@@ -16,6 +16,7 @@ urlpatterns = [
     path('clientesportipo/', views.TipoClientesAPIView.as_view()),
     path('predecir/',views.Clasificacion.predecirTipoCliente),
     path('enviarSolicitud/',views.Clasificacion.guardar),
+    path('verDiagrama/',views.Clasificacion.enviarDiagrama),
 
     #Búsqueda de Clientes por DNI
     path('mostrarInterfazBuscar/', views.Clasificacion.mostrarInterfazBuscar),
