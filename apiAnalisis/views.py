@@ -15,6 +15,7 @@ import requests
 import json
 import pandas as pd
 import csv
+
 # Create your views here.
 class ListLibro(generics.ListCreateAPIView):
     """
@@ -155,6 +156,16 @@ class Clasificacion():
         print(resul)
         #return resul,render(request, "resultado.html",{"e":resul})
         return HttpResponse(resul)
+
+    def enviarDiagrama(request):
+        try:
+            hola=modeloAnalisis.crearGrafica(modeloAnalisis)
+            hola="\'"+hola+"\'"
+            print(hola)
+        except:
+            hola="WRONG"
+        #return HttpResponse(hola)
+        return render(request, "resultado.html",{"e":hola})
 
     def buscarCliente(request):
         try:

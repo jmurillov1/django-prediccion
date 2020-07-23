@@ -49,6 +49,25 @@ class modeloAnalisis():
                 similares.update({str(i):[round(x,5),int(tipo)]})
         return similares
 
+    def crearGrafica(self):
+        etiquetas=["Buenos Clientes","Malos Clientes"]
+        lec = pd.read_csv("apiAnalisis/Datasets/DatasetBanco/3.DatasetBanco.csv")
+        clientes = lec.values.tolist()
+        cont=0
+        cont2=0
+        for i in clientes:
+            lista = i[0].split(";")
+            if lista[17]==str(1):
+                cont=cont+1
+            elif lista[17]==str(2):
+                cont2=cont2+1
+        porcentajes=[cont,cont2]
+        plt.pie(porcentajes,labels=etiquetas,startangle=90,explode=(0.1,0.1),radius=1.2,autopct="%1.2f%%")
+        plt.title("Gráfica Clientes")
+        plt.savefig("pie.jpg")
+        path = os.path.realpath("pie.jpg")
+        return path
+
     def predecirTipoCliente(self,Dni=0):
         print('Dni:',Dni)
         self.preprocesamiento(self)
@@ -67,7 +86,6 @@ class modeloAnalisis():
         return mensaje
 
     def predecir(self,Dni=0):
-        print(self.dfOriginal)
         cliente=self.dfOriginal.loc[self.dfOriginal['DNI'] == Dni]
         print('LLego cliente: ',cliente)
         tipoCliente=2
@@ -81,9 +99,20 @@ class modeloAnalisis():
             calculos=self.calculoSimilitud(self,Dni)
             ordenados = dict(sorted(calculos.items(), key=operator.itemgetter(1),reverse=True))
             ind=list(ordenados)[0]
-            res=ordenados[ind]
-            tipoCliente=res[1]
-            print(res)
+            cont=0
+            cont2=0
+            for i in range(10):
+                res1= list(ordenados)[i]
+                ar=ordenados[res1]
+                if ar[1]==1:
+                    cont=cont+1
+                else:
+                    cont2=cont2+1
+            print("# 1: ",cont, " , #2: ",cont2)
+            if cont>cont2 or cont==cont2:
+                tipoCliente=1
+            elif cont2>cont:
+                tipoCliente=2
             self.dfOriginal.at[indiceCliente,'TIPOCLIENTE']=tipoCliente
             self.dfOriginal.to_csv("apiAnalisis/Datasets/DatasetBanco/3.DatasetBanco.csv",sep=";", index=False)
         else:
