@@ -61,12 +61,12 @@ class modeloAnalisis():
                 cont=cont+1
             elif lista[17]==str(2):
                 cont2=cont2+1
-        porcentajes=[cont,cont2]
-        plt.pie(porcentajes,labels=etiquetas,startangle=90,explode=(0.1,0.1),radius=1.2,autopct="%1.2f%%")
-        plt.title("Gráfica Clientes")
-        plt.savefig("pie.jpg")
-        path = os.path.realpath("pie.jpg")
-        return path
+        porcentajes=[str(cont),str(cont2)]
+        #plt.pie(porcentajes,labels=etiquetas,startangle=90,explode=(0.1,0.1),radius=1.2,autopct="%1.2f%%")
+        #plt.title("Gráfica Clientes")
+        #plt.savefig("pie.jpg")
+        #path = os.path.realpath("pie.jpg")
+        return porcentajes
 
     def predecirTipoCliente(self,Dni=0):
         print('Dni:',Dni)

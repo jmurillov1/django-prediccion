@@ -160,12 +160,11 @@ class Clasificacion():
     def enviarDiagrama(request):
         try:
             hola=modeloAnalisis.crearGrafica(modeloAnalisis)
-            hola="\'"+hola+"\'"
             print(hola)
         except:
             hola="WRONG"
-        #return HttpResponse(hola)
-        return render(request, "resultado.html",{"e":hola})
+        return HttpResponse(hola)
+        #return render(request, "resultado.html",{"e":resul})
 
     def buscarCliente(request):
         try:
